@@ -16,15 +16,12 @@ const Game = (() => {
     [0, 4, 8],
     [2, 4, 6], // Diagonals
   ];
-
-  const isActive = active;
-  const setActive = (val) => {
-    active = val;
-  };
   const getCurrentPlayer = () => currentPlayer;
   const switchCurrentPlayer = () => {
     currentPlayer = currentPlayer == "X" ? "O" : "X";
   };
+  const setActive = (val) => (active = val);
+  const setStatusText = (msg) => (statusText.innerHTML = msg);
 
   const render = () => {
     board.innerHTML = "";
@@ -58,10 +55,7 @@ const Game = (() => {
     render();
   };
 
-  const setStatusText = (msg) => (statusText.innerHTML = msg);
-
   return {
-    isActive,
     setActive,
     getCurrentPlayer,
     switchCurrentPlayer,
@@ -85,7 +79,7 @@ const handleClick = (event) => {
     });
   } else if (Game.checkDraw()) {
     Game.setActive(false);
-    Game.setStatusText(`Game is a DRAW!`);
+    Game.setStatusText("Game is a DRAW!");
   } else {
     Game.switchCurrentPlayer();
     Game.setStatusText(`${Game.getCurrentPlayer()}'s turn`);
